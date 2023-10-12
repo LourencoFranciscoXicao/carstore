@@ -55,9 +55,10 @@ public class CarDao {
 
             while (resultSet.next()) {
 
+                String carId = resultSet.getString("id");
                 String carName = resultSet.getString("name");
 
-                Car car = new Car(carName);
+                Car car = new Car(carId, carName);
 
                 cars.add(car);
 
@@ -74,6 +75,63 @@ public class CarDao {
             System.out.println("fail in database connection");
 
             return Collections.emptyList();
+        }
+    }
+
+    public String findCarByid (String carId) {
+
+        String SQL = "SELECT * FROM CAR WHERE ID = ?";
+
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            String carName = resultSet.getString("name");
+
+            System.out.println("success in select car");
+
+            connection.close();
+
+            return carName;
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
+
+            return null;
+
+        }
+
+    }
+
+    public void deleteCarById(String carId) {
+
+        String SQL = "DELETE FROM CAR WHERE ID = ?";
+
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, carId);
+            preparedStatement.execute();
+
+            System.out.println("success on delete car with id: " + carId);
+
+            connection.close();
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
+
         }
     }
 }
