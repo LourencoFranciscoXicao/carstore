@@ -7,11 +7,10 @@
             <label>Car Name</label>
 
             <input type="text" name="carName" id="carName">
+            <input type="hidden" id="id" name="id" value="${param.id}">
 
-            <button type="submit">Register</button>
+            <button type="submit">Save</button>
 
         </form>
-
     </body>
-
 </html>

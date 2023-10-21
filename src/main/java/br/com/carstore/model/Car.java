@@ -2,7 +2,7 @@ package br.com.carstore.model;
 
 public class Car {
 
-    private String Id;
+    private String id;
     private String name;
 
     public Car(String name) {
@@ -10,13 +10,13 @@ public class Car {
     }
 
     public Car(String id, String name) {
-        Id = id;
+        this.id = id;
         this.name = name;
     }
 
     public String getId() {
 
-        return Id;
+        return id;
     }
 
     public String getName() {
